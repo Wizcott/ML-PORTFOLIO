@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Github, Linkedin, Mail, ChevronRight } from 'lucide-react';
 
 export default function App() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
-  const projects = [
+  type Project = {
+    title: string;
+    description: string;
+    tags: string[];
+    color: ProjectColor;
+    highlight?: boolean;
+  };
+  const projects: Project[] = [
+
     {
       title: "NAI-SWAMS: AI-Powered Waste Management",
       description: "Smart waste management system for Nigerian cities using AI to predict waste collection needs and optimize routes. Achieved 99.3% prediction accuracy with Random Forest and built complete dashboard with voice assistant in local languages.",
@@ -38,16 +46,21 @@ export default function App() {
     "Flask", "Streamlit", "Git", "Machine Learning"
   ];
 
-  const getColorClasses = (color, highlight = false) => {
-    const colors = {
-      emerald: highlight 
-        ? "border-emerald-500 bg-gradient-to-r from-emerald-50 to-green-50 hover:from-emerald-100 hover:to-green-100" 
-        : "border-emerald-500 hover:bg-emerald-50",
-      blue: "border-blue-500 hover:bg-blue-50",
-      green: "border-green-500 hover:bg-green-50",
-      purple: "border-purple-500 hover:bg-purple-50"
-    };
-    return colors[color] || colors.blue;
+  type ProjectColor = "emerald" | "blue" | "green" | "purple";
+
+  const getColorClasses = (color: ProjectColor, highlight = false) => {
+
+      const colors: Record<ProjectColor, string> = {
+    emerald: highlight 
+      ? "border-emerald-500 bg-gradient-to-r from-emerald-50 to-green-50 hover:from-emerald-100 hover:to-green-100" 
+      : "border-emerald-500 hover:bg-emerald-50",
+    blue: "border-blue-500 hover:bg-blue-50",
+    green: "border-green-500 hover:bg-green-50",
+    purple: "border-purple-500 hover:bg-purple-50"
+  };
+
+  return colors[color];
+
   };
 
   return (
