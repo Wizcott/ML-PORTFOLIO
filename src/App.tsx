@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { Github, Linkedin, Mail, ChevronRight } from 'lucide-react';
 
-export default function App() {
+type ProjectColor = 'emerald' | 'blue' | 'green' | 'purple';
+
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  color: ProjectColor;
+  highlight?: boolean;
+}
+
+export default function MLPortfolio() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
-  type Project = {
-    title: string;
-    description: string;
-    tags: string[];
-    color: ProjectColor;
-    highlight?: boolean;
-  };
   const projects: Project[] = [
-
     {
       title: "NAI-SWAMS: AI-Powered Waste Management",
       description: "Smart waste management system for Nigerian cities using AI to predict waste collection needs and optimize routes. Achieved 99.3% prediction accuracy with Random Forest and built complete dashboard with voice assistant in local languages.",
@@ -40,31 +42,22 @@ export default function App() {
     }
   ];
 
-  const skills = [
-    "Python", "TensorFlow", "PyTorch", "Scikit-learn", 
+  const skills: string[] = [
+    "Python", "TensorFlow", "PyTorch", "Scikit-learn",
     "BERT", "NLP", "Computer Vision", "Deep Learning",
     "Flask", "Streamlit", "Git", "Machine Learning"
   ];
 
-  type ProjectColor = "emerald" | "blue" | "green" | "purple";
-
-  const getColorClasses = (color: ProjectColor, highlight = false) => {
-
-      const colors: Record<ProjectColor, string> = {
-    emerald: highlight 
-      ? "border-emerald-500 bg-gradient-to-r from-emerald-50 to-green-50 hover:from-emerald-100 hover:to-green-100" 
-      : "border-emerald-500 hover:bg-emerald-50",
+  const colorMap: Record<ProjectColor, string> = {
+    emerald: "border-emerald-500 bg-gradient-to-r from-emerald-50 to-green-50 hover:from-emerald-100 hover:to-green-100",
     blue: "border-blue-500 hover:bg-blue-50",
     green: "border-green-500 hover:bg-green-50",
     purple: "border-purple-500 hover:bg-purple-50"
   };
 
-  return colors[color];
-
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-900">
+
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <div className="container mx-auto px-6 py-6">
@@ -88,15 +81,16 @@ export default function App() {
             AI & Machine Learning Specialist
           </div>
           <h2 className="text-5xl font-bold mb-6 leading-tight">
-            Building Intelligent Solutions for <span className="text-blue-600">Real-World Problems</span>
+            Building Intelligent Solutions for{" "}
+            <span className="text-blue-600">Real-World Problems</span>
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed mb-6">
-            Specializing in deep learning, NLP, and computer vision with a focus on 
+            Specializing in deep learning, NLP, and computer vision with a focus on
             impactful applications in healthcare, smart cities, and social good.
           </p>
           <div className="flex gap-4 items-center">
-            <a 
-              href="#projects" 
+            <a
+              href="#projects"
               className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition shadow-lg hover:shadow-xl"
             >
               View My Work
@@ -114,12 +108,12 @@ export default function App() {
         <h2 className="text-4xl font-bold mb-12">Featured Projects</h2>
         <div className="grid gap-6">
           {projects.map((project, idx) => (
-            <div 
+            <div
               key={idx}
               onMouseEnter={() => setHoveredProject(idx)}
               onMouseLeave={() => setHoveredProject(null)}
-              className={`border-l-4 ${getColorClasses(project.color, project.highlight)} p-6 rounded-r-lg transition-all duration-300 cursor-pointer ${
-                hoveredProject === idx ? 'shadow-xl transform translate-x-2' : 'shadow'
+              className={`border-l-4 ${colorMap[project.color]} p-6 rounded-r-lg transition-all duration-300 cursor-pointer ${
+                hoveredProject === idx ? 'shadow-xl translate-x-2' : 'shadow'
               } ${project.highlight ? 'ring-2 ring-emerald-200' : ''}`}
             >
               {project.highlight && (
@@ -131,8 +125,8 @@ export default function App() {
               <p className="text-gray-700 mb-4 leading-relaxed">{project.description}</p>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag, i) => (
-                  <span 
-                    key={i} 
+                  <span
+                    key={i}
                     className="text-sm bg-white border border-gray-200 px-3 py-1 rounded-full hover:border-gray-400 transition"
                   >
                     {tag}
@@ -150,9 +144,9 @@ export default function App() {
           <h2 className="text-4xl font-bold mb-12">Technical Skills</h2>
           <div className="flex flex-wrap gap-3">
             {skills.map((skill, idx) => (
-              <span 
-                key={idx} 
-                className="bg-white/10 backdrop-blur-sm border border-white/20 px-5 py-3 rounded-lg hover:bg-white/20 transition cursor-default"
+              <span
+                key={idx}
+                className="bg-white/10 border border-white/20 px-5 py-3 rounded-lg hover:bg-white/20 transition cursor-default"
               >
                 {skill}
               </span>
@@ -169,25 +163,25 @@ export default function App() {
             Open to collaborations, freelance projects, and full-time opportunities.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <a 
-              href="mailto:Wizcottduyi@gmail.com" 
+            <a
+              href="mailto:Wizcottduyi@gmail.com"
               className="flex items-center gap-2 bg-blue-600 text-white hover:bg-blue-700 px-8 py-4 rounded-lg transition shadow-lg hover:shadow-xl"
             >
               <Mail size={20} />
               Email Me
             </a>
-            <a 
-              href="https://github.com/Wizcott" 
-              target="_blank" 
+            <a
+              href="https://github.com/Wizcott"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-gray-900 text-white hover:bg-gray-800 px-8 py-4 rounded-lg transition shadow-lg hover:shadow-xl"
             >
               <Github size={20} />
               GitHub
             </a>
-            <a 
-              href="https://www.linkedin.com/in/testimony-faluyi-6051a224a" 
-              target="_blank" 
+            <a
+              href="https://www.linkedin.com/in/testimony-faluyi-6051a224a"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-blue-700 text-white hover:bg-blue-800 px-8 py-4 rounded-lg transition shadow-lg hover:shadow-xl"
             >
@@ -204,6 +198,7 @@ export default function App() {
           <p>© 2026 Faluyi Testimony Oluwaduyilemi. Built with React & Tailwind CSS</p>
         </div>
       </footer>
+
     </div>
   );
 }
