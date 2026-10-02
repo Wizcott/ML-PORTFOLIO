@@ -49,7 +49,7 @@ export default function MLPortfolio() {
       details: "Applied K-Means clustering with Elbow method for optimal cluster selection. Uses Silhouette score for evaluation, achieving 75% accuracy. Groups similar songs and artists to deliver personalized Nigerian music recommendations.",
       tags: ["K-Means", "Clustering", "Scikit-learn", "Python"],
       color: "purple",
-      github: "https://github.com/Wizcott"
+      github: "https://github.com/Wizcott/Nigerian-Music-Recommendation-System"
     },
     {
       title: "Basketball Player Performance Analysis",
