@@ -41,7 +41,7 @@ export default function MLPortfolio() {
       details: "Classifies brain MRI scans into glioma, meningioma, pituitary tumor, or no tumor using transfer learning with VGG16. Preprocessed with OpenCV and deployed via Streamlit for easy medical image upload and analysis.",
       tags: ["TensorFlow", "VGG16", "Computer Vision", "Streamlit"],
       color: "green",
-      github: "https://github.com/Wizcott"
+      github: "https://github.com/Wizcott/brain_cancer_classifier"
     },
     {
       title: "Nigerian Music Recommendation System",
